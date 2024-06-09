@@ -1,0 +1,24 @@
+{
+    "name": "natokpe/no-tranquil-setup",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "NatOkpe\\Wp\\Plugin\\TranquilSetup\\": "src/"
+        },
+
+        "files": [
+            "vendor/cmb2/cmb2/init.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Nat Okpe",
+            "email": "me@nat.com.ng"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "cmb2/cmb2": "^2.10"
+    }
+}
