@@ -1,5 +1,6 @@
 {
     "name": "natokpe/no-tranquil-setup",
+    "description": "Setup for NO Tranquil WordPress theme.",
     "type": "project",
     "license": "MIT",
     "autoload": {
