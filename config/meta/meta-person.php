@@ -113,7 +113,7 @@ return [
         'box-fields' => [
             'email' => [
                 'name'       => __('Email Address', 'natokpe'),
-                'desc'       => __('e.g. natokpe@gmail.com', 'natokpe'),
+                'desc'       => __('e.g. me@nat.com.ng', 'natokpe'),
                 'type'       => 'text_email',
                 'attributes'       => [
                     'style'    => 'width: 100%;',
@@ -199,15 +199,6 @@ return [
 
             'social_tg' => [
                 'name'       => __('Telegram', 'natokpe'),
-                'desc'       => __('', 'natokpe'),
-                'type'       => 'text',
-                'attributes'       => [
-                    'style'    => 'width: 100%;',
-                ],
-            ],
-
-            'social_qu' => [
-                'name'       => __('Quora', 'natokpe'),
                 'desc'       => __('', 'natokpe'),
                 'type'       => 'text',
                 'attributes'       => [
