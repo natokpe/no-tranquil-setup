@@ -23,8 +23,8 @@ return [
             ],
 
             'start_time' => [
-                'name'       => __('Start Date/Time', 'natokpe'),
-                'desc'       => __('When event begins.', 'natokpe'),
+                'name'       => __('Start Date', 'natokpe'),
+                'desc'       => __('When event begins', 'natokpe'),
                 'type'       => 'text_time',
                 'attributes'       => [
                     'required' => 'required',
@@ -34,7 +34,7 @@ return [
 
             'end_time' => [
                 'name'       => __('End Time', 'natokpe'),
-                'desc'       => __('When event ends.', 'natokpe'),
+                'desc'       => __('When event ends', 'natokpe'),
                 'type'       => 'text_time',
                 'attributes'       => [
                     'style'    => 'width: 100%;',

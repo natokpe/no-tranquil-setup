@@ -464,13 +464,13 @@ class Engine
         });
 
         add_filter('upload_mimes', function ($mimes) {
-            $new_mimes = Config::get('engine')['upload_mimes'];
+            $new_mimes = Config::get('engine')['upload_mimes'] ?? [];
 
-            if (is_callable($new_mimes)) {
-                $new_mimes = $new_mimes($mimes);
+            if (! (Config::get('engine')['upload_mimes_absolute'] ?? true)) {
+                $new_mimes = array_merge($mimes, $new_mimes);
             }
 
-            return is_array($new_mimes) ? $new_mimes : [];
+            return $new_mimes;
         });
 
         add_filter('show_admin_bar' , function () {
@@ -673,6 +673,150 @@ class Engine
 
             return $ed_roles;
         });
+
+        // global $phpmailer;
+
+        // add_filter('phpmailer_init', function($phpmailer) {
+        //     $setup = [
+        //         'connection_type' => filter_var(
+        //             self::get_option('connection_type', 'smtp', 'email-settings')
+        //             get_post_meta(
+        //                 $this->_mail_server->ID, 'connection_type', true
+        //             ),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     $ls = DataList::get('email_connection');
+        //                     $rt = array_key_exists($vl, $ls) ? $vl : null;
+        //                     return $rt;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'host' = filter_var(
+        //             get_post_meta($this->_mail_server->ID, 'host', true),
+        //             FILTER_VALIDATE_DOMAIN,
+        //             [
+        //                 'options' => [
+        //                     'default' => null,
+        //                 ],
+        //                 'flags' => FILTER_FLAG_HOSTNAME,
+        //             ]
+        //         ),
+
+        //         // well-known: 0-1024
+        //         // registered: 1024-49151
+        //         // dynamic and private: 49152-65535
+        //         'port' = filter_var(
+        //             get_post_meta($this->_mail_server->ID, 'port', true),
+        //             FILTER_VALIDATE_INT,
+        //             [
+        //             'options' => [
+        //                 'default' => null,
+        //                 'min_range' => 0,
+        //                 'max_range' => 65535
+        //             ],
+        //             'flags' => FILTER_NULL_ON_FAILURE,
+        //         ]),
+
+        //         'encryption_type' = filter_var(
+        //             get_post_meta($this->_mail_server->ID, 'encryption_type', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     $ls = DataList::get('smtp_encryption');
+        //                     $rt = array_key_exists($vl, $ls) ? $vl : null;
+        //                     return $rt;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'require_auth' => filter_var(
+        //             get_post_meta($this->_email_account->ID, 'require_auth', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     $rt = is_bool($vl) ? ($vl === true) : null;
+
+        //                     if (is_string($vl)) {
+        //                         $rt = strtolower($vl) === 'true';
+        //                         $rt = $rt || (strtolower($vl) === 'yes');
+        //                         $rt = $rt || (strtolower($vl) === 'on');
+        //                     }
+
+        //                     return $rt;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'username' => filter_var(
+        //             get_post_meta($this->_email_account->ID, 'username', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     return is_string($vl) ? $vl : null;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'password' => filter_var(
+        //             get_post_meta($this->_email_account->ID, 'password', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     return is_string($vl) ? $vl : null;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'sender_address' = filter_var(
+        //             get_post_meta($this->_email_account->ID, 'sender_address', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     return is_string($vl) ? $vl : null;
+        //                 },
+        //             ],
+        //         ),
+
+        //         'sender_name' = filter_var(
+        //             get_post_meta($this->_email_account->ID, 'sender_name', true),
+        //             FILTER_CALLBACK,
+        //             [
+        //                 'options' => function ($vl) {
+        //                     return is_string($vl) ? $vl : null;
+        //                 },
+        //             ],
+        //         ),
+        //     ];
+
+        //     if ( === 'smtp') {
+        //         $phpmailer->isSMTP();
+        //     }
+
+        //     $phpmailer->Host       = $setup['host'];
+        //     $phpmailer->SMTPAuth   = $setup['require_auth'];
+        //     $phpmailer->Port       = $setup['port'];
+        //     $phpmailer->Username   = $setup['username'];
+        //     $phpmailer->Password   = $setup['password'];
+        //     $phpmailer->SMTPSecure = $setup['encryption_type'];
+
+        //     $phpmailer->setFrom(
+        //         $setup['sender_address'] ?? '',
+        //         $setup['sender_name'] ?? ''
+        //     );
+
+        //     // if ($setup['content_type'] === 'text/html') {
+        //     //     $phpmailer->isHTML(true);
+
+        //     //     $phpmailer->Body    = $setup['message']['body_html'];
+        //     //     $phpmailer->AltBody = $setup['message']['body_plain'];
+        //     // } else {
+        //     //     $phpmailer->Body = $setup['message']['body_plain'];
+        //     // }
+
+        //     // $phpmailer->Subject = $setup['message']['subject'];
+        // });
 
     }
 }

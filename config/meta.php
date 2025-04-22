@@ -9,7 +9,6 @@ $meta = [];
 
 $meta[] = require('meta' . DIRECTORY_SEPARATOR . 'meta-person.php');
 $meta[] = require('meta' . DIRECTORY_SEPARATOR . 'meta-event.php');
-$meta[] = require('meta' . DIRECTORY_SEPARATOR . 'meta-event_location.php');
 
 $meta = array_merge(...$meta);
 
